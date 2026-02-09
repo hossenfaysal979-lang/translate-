@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Navigation } from './components/Navigation';
 import { HomePage } from './pages/HomePage';
@@ -36,7 +37,6 @@ const App: React.FC = () => {
   }, []);
 
   const handleLogin = () => {
-    // Mock login logic
     setIsAuthenticated(true);
   };
 
@@ -140,12 +140,10 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#f8f9ff] max-w-md mx-auto relative shadow-2xl overflow-hidden">
-      {/* Main Content */}
       <main className="h-full overflow-y-auto no-scrollbar">
         {renderContent()}
       </main>
 
-      {/* Bottom Navigation */}
       {!hideNav && (
         <Navigation currentRoute={currentRoute} onNavigate={setCurrentRoute} />
       )}

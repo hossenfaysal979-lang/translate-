@@ -1,6 +1,6 @@
 
 import { Language, TranslationMode } from './types';
-import { PlayCircle, Video, Globe, Sparkles, Cpu } from 'lucide-react';
+import { PlayCircle, Video, Sparkles, Cpu } from 'lucide-react';
 
 export const SUPPORTED_LANGUAGES = Object.values(Language);
 
@@ -23,7 +23,7 @@ export const COMMUNICATION_TOOLS = [
     context: 'universal',
     desc: 'Universal AI Overlay',
     hasTrial: true,
-    trialLimit: 720 // 12 minutes
+    trialLimit: 720
   },
   {
     id: 'video_call',

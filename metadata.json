@@ -1,5 +1,5 @@
 {
-  "name": "AI Live Translate",
+  "name": "AI live Translations",
   "description": "A professional AI-powered translation and communication assistant for real-time text, voice, and call translation.",
   "requestFramePermissions": [
     "microphone",

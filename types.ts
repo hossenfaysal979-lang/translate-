@@ -1,3 +1,4 @@
+
 export enum AppRoute {
   HOME = 'HOME',
   CONVERSATION = 'CONVERSATION',
@@ -9,7 +10,7 @@ export enum AppRoute {
   UNIVERSAL_TRANSLATE = 'UNIVERSAL_TRANSLATE'
 }
 
-export type CallContext = 'face-to-face' | 'phone' | 'whatsapp' | 'conference' | 'video' | 'video_file' | 'universal';
+export type CallContext = 'face-to-face' | 'phone' | 'whatsapp' | 'conference' | 'video' | 'video_file' | 'universal' | 'internet';
 
 export enum Language {
   ENGLISH = 'English',

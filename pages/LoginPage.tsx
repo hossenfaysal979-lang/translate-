@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Smartphone, Facebook, Chrome, Globe } from 'lucide-react';
 
@@ -17,7 +18,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           <div className="w-24 h-24 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-[2rem] mx-auto flex items-center justify-center shadow-xl shadow-indigo-500/20 mb-6 transform rotate-3">
              <Globe className="text-white" size={48} strokeWidth={1.5} />
           </div>
-          <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">AI Live Translate</h1>
+          <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">AI live Translations</h1>
           <p className="text-slate-500 text-lg font-medium">Break language barriers instantly with AI power.</p>
         </div>
 

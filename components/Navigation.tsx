@@ -9,38 +9,42 @@ interface NavigationProps {
 
 export const Navigation: React.FC<NavigationProps> = ({ currentRoute, onNavigate }) => {
   const navItems = [
-    { route: AppRoute.HOME, icon: Home, label: 'Home' },
+    { route: AppRoute.HOME, icon: Home, label: 'Explore' },
     { route: AppRoute.CONVERSATION, icon: Mic, label: 'Voice' },
-    { route: AppRoute.HISTORY, icon: Grid, label: 'History' },
-    { route: AppRoute.PROFILE, icon: User, label: 'Profile' },
+    { route: AppRoute.HISTORY, icon: Grid, label: 'Journal' },
+    { route: AppRoute.PROFILE, icon: User, label: 'Account' },
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 pointer-events-none flex justify-center pb-6 pt-4 bg-gradient-to-t from-white/80 via-white/50 to-transparent">
-      <div className="glass-nav pointer-events-auto flex items-center justify-between px-8 py-4 rounded-full shadow-[0_20px_40px_-12px_rgba(0,0,0,0.1)] w-[90%] max-w-[360px] mx-auto border border-white/50">
+    <div className="fixed bottom-0 left-0 right-0 z-50 pointer-events-none flex justify-center pb-8 pt-4">
+      <div className="glass-nav pointer-events-auto flex items-center justify-between px-6 py-3 rounded-[2.5rem] w-[92%] max-w-[400px] mx-auto">
         {navItems.map((item) => {
           const isActive = currentRoute === item.route;
           return (
             <button
               key={item.route}
               onClick={() => onNavigate(item.route)}
-              className="relative flex flex-col items-center justify-center w-12 h-12"
+              className="relative flex flex-col items-center justify-center py-2 px-4 transition-all duration-500 rounded-2xl group"
             >
-              <div className={`transition-all duration-300 absolute inset-0 rounded-full ${isActive ? 'bg-indigo-50 opacity-100 scale-100' : 'opacity-0 scale-50'}`} />
+              <div className={`transition-all duration-500 absolute inset-0 rounded-2xl ${isActive ? 'bg-indigo-600/10 scale-100' : 'bg-transparent scale-75 opacity-0'}`} />
               
               <item.icon 
-                size={24} 
-                className={`relative z-10 transition-all duration-300 ${
-                  isActive ? 'text-indigo-600 translate-y-[-2px]' : 'text-slate-400'
+                size={22} 
+                className={`relative z-10 transition-all duration-500 ${
+                  isActive ? 'text-indigo-600' : 'text-slate-400 group-hover:text-slate-600'
                 }`} 
                 strokeWidth={isActive ? 2.5 : 2}
               />
               
-              <span className={`absolute -bottom-1 text-[10px] font-bold transition-all duration-300 ${
-                 isActive ? 'opacity-100 text-indigo-600 translate-y-0' : 'opacity-0 translate-y-2'
+              <span className={`text-[9px] font-bold mt-1 transition-all duration-500 uppercase tracking-widest ${
+                 isActive ? 'opacity-100 text-indigo-600' : 'opacity-0 scale-50'
               }`}>
                 {item.label}
               </span>
+
+              {isActive && (
+                <div className="absolute -top-1 w-1 h-1 bg-indigo-600 rounded-full animate-pulse" />
+              )}
             </button>
           );
         })}

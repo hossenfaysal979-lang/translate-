@@ -2,20 +2,20 @@
 import { GoogleGenAI } from "@google/genai";
 import { Language, TranslationMode } from "../types";
 
-// Always use a named parameter for the API key and access process.env.API_KEY directly.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const translateText = async (
   text: string,
   sourceLang: Language,
   targetLang: Language,
-  mode: TranslationMode
+  mode: TranslationMode,
+  useInternetGrounding: boolean = false
 ): Promise<string> => {
   if (!text.trim()) return "";
 
-  // Select appropriate model based on task complexity.
-  // Gemini 3 Flash is ideal for near-instant real-time captions.
-  const modelId = mode === TranslationMode.PREMIUM ? 'gemini-3-pro-preview' : 'gemini-3-flash-preview';
+  const modelId = useInternetGrounding || mode === TranslationMode.PREMIUM 
+    ? 'gemini-3-pro-preview' 
+    : 'gemini-3-flash-preview';
   
   const isAuto = sourceLang === Language.AUTO_DETECT;
   let systemInstruction = `You are a professional real-time translator specializing in "Autocratic" (Automatic) language detection. `;
@@ -26,32 +26,26 @@ export const translateText = async (
     systemInstruction += `Translate the following text from ${sourceLang} to ${targetLang}. `;
   }
 
-  systemInstruction += `Output ONLY the translated text. Maintain the original tone and urgency. Keep it concise for video captions.`;
-
-  switch (mode) {
-    case TranslationMode.PREMIUM:
-      systemInstruction += " Use high-level vocabulary and cultural nuance.";
-      break;
-    case TranslationMode.DEEPL:
-      systemInstruction += " Focus on natural, native-sounding phrasing.";
-      break;
-    case TranslationMode.BILINGUAL:
-      systemInstruction += " Provide only the translation, no meta-commentary.";
-      break;
-    case TranslationMode.STANDARD:
-    default:
-      systemInstruction += " Use clear, simple language suitable for quick reading.";
-      break;
+  if (useInternetGrounding) {
+    systemInstruction += `This is internet/web content. Use Google Search to cross-reference terms, trending slang, or news context to ensure the translation is relevant to the current internet landscape. `;
   }
 
+  systemInstruction += `Output ONLY the translated text. Maintain the original tone and urgency. Keep it concise for real-time captions.`;
+
   try {
+    const config: any = {
+      systemInstruction,
+      temperature: 0.1,
+    };
+
+    if (useInternetGrounding) {
+      config.tools = [{ googleSearch: {} }];
+    }
+
     const response = await ai.models.generateContent({
       model: modelId,
       contents: text,
-      config: {
-        systemInstruction,
-        temperature: 0.1, // Near-zero temperature for maximum translation consistency
-      },
+      config,
     });
 
     return response.text || "";
