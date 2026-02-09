@@ -3,13 +3,17 @@ export enum AppRoute {
   CONVERSATION = 'CONVERSATION',
   HISTORY = 'HISTORY',
   PROFILE = 'PROFILE',
-  CALL_MODE = 'CALL_MODE'
+  CALL_MODE = 'CALL_MODE',
+  VIDEO_FILE_TRANSLATE = 'VIDEO_FILE_TRANSLATE',
+  STREAM_VIDEO = 'STREAM_VIDEO',
+  UNIVERSAL_TRANSLATE = 'UNIVERSAL_TRANSLATE'
 }
 
-export type CallContext = 'face-to-face' | 'phone' | 'whatsapp' | 'conference';
+export type CallContext = 'face-to-face' | 'phone' | 'whatsapp' | 'conference' | 'video' | 'video_file' | 'universal';
 
 export enum Language {
   ENGLISH = 'English',
+  INDONESIAN = 'Indonesian',
   CHINESE_SIMPLIFIED = 'Chinese (Simplified)',
   SPANISH = 'Spanish',
   JAPANESE = 'Japanese',
@@ -19,15 +23,16 @@ export enum Language {
   BENGALI = 'Bengali',
   HINDI = 'Hindi',
   URDU = 'Urdu',
-  ARABIC = 'Arabic'
+  ARABIC = 'Arabic',
+  AUTO_DETECT = 'Auto Detect'
 }
 
 export enum TranslationMode {
-  PREMIUM = 'Premium', // High accuracy, expensive
-  AI_SMART = 'AI Smart', // Balanced
-  STANDARD = 'Standard', // Fast
-  DEEPL = 'DeepL-Style', // Natural phrasing
-  BILINGUAL = 'Bilingual', // Shows both
+  PREMIUM = 'Premium',
+  AI_SMART = 'AI Smart',
+  STANDARD = 'Standard',
+  DEEPL = 'DeepL-Style',
+  BILINGUAL = 'Bilingual',
 }
 
 export interface HistoryItem {
@@ -51,6 +56,6 @@ export interface ChatMessage {
   id: string;
   sender: 'user' | 'ai' | 'partner';
   text: string;
-  originalText?: string; // For bilingual mode
+  originalText?: string;
   timestamp: number;
 }

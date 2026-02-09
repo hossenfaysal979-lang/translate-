@@ -28,6 +28,7 @@ export const TranslationCard: React.FC<TranslationCardProps> = ({ item }) => {
     if (lang.includes('Hindi')) locale = 'hi-IN';
     if (lang.includes('Urdu')) locale = 'ur-PK';
     if (lang.includes('Arabic')) locale = 'ar-SA';
+    if (lang.includes('Indonesian')) locale = 'id-ID';
     
     utterance.lang = locale;
     window.speechSynthesis.speak(utterance);

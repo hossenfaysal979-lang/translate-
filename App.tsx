@@ -4,6 +4,9 @@ import { HomePage } from './pages/HomePage';
 import { ConversationPage } from './pages/ConversationPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { LoginPage } from './pages/LoginPage';
+import { VideoFileTranslatorPage } from './pages/VideoFileTranslatorPage';
+import { StreamingVideoPage } from './pages/StreamingVideoPage';
+import { UniversalTranslatePage } from './pages/UniversalTranslatePage';
 import { AppRoute, UserProfile, HistoryItem, CallContext } from './types';
 import { INITIAL_POINTS } from './constants';
 import { TranslationCard } from './components/TranslationCard';
@@ -74,6 +77,27 @@ const App: React.FC = () => {
              context={callContext}
           />
         );
+      case AppRoute.VIDEO_FILE_TRANSLATE:
+        return (
+          <VideoFileTranslatorPage 
+            user={user}
+            navigate={setCurrentRoute}
+          />
+        );
+      case AppRoute.STREAM_VIDEO:
+        return (
+          <StreamingVideoPage 
+            user={user}
+            navigate={setCurrentRoute}
+          />
+        );
+      case AppRoute.UNIVERSAL_TRANSLATE:
+        return (
+          <UniversalTranslatePage 
+            user={user}
+            navigate={setCurrentRoute}
+          />
+        );
       case AppRoute.PROFILE:
         return <ProfilePage user={user} onLogout={handleLogout} />;
       case AppRoute.HISTORY:
@@ -107,6 +131,13 @@ const App: React.FC = () => {
     return <LoginPage onLogin={handleLogin} />;
   }
 
+  const hideNav = [
+    AppRoute.VIDEO_FILE_TRANSLATE, 
+    AppRoute.STREAM_VIDEO,
+    AppRoute.UNIVERSAL_TRANSLATE,
+    AppRoute.CALL_MODE
+  ].includes(currentRoute);
+
   return (
     <div className="min-h-screen bg-[#f8f9ff] max-w-md mx-auto relative shadow-2xl overflow-hidden">
       {/* Main Content */}
@@ -115,7 +146,9 @@ const App: React.FC = () => {
       </main>
 
       {/* Bottom Navigation */}
-      <Navigation currentRoute={currentRoute} onNavigate={setCurrentRoute} />
+      {!hideNav && (
+        <Navigation currentRoute={currentRoute} onNavigate={setCurrentRoute} />
+      )}
     </div>
   );
 };
