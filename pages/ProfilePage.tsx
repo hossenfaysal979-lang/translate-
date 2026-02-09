@@ -4,9 +4,10 @@ import { CreditCard, History, Settings, LogOut, ChevronRight, Crown, Sparkles, Z
 
 interface ProfilePageProps {
   user: UserProfile;
+  onLogout: () => void;
 }
 
-export const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
+export const ProfilePage: React.FC<ProfilePageProps> = ({ user, onLogout }) => {
   return (
     <div className="p-6 pb-24 space-y-6">
       <h2 className="text-3xl font-bold text-slate-900">My Profile</h2>
@@ -83,7 +84,10 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
           ))}
       </div>
 
-       <button className="w-full p-4 text-rose-500 font-bold bg-rose-50 rounded-2xl hover:bg-rose-100 transition-colors flex items-center justify-center gap-2 text-sm">
+       <button 
+         onClick={onLogout}
+         className="w-full p-4 text-rose-500 font-bold bg-rose-50 rounded-2xl hover:bg-rose-100 transition-colors flex items-center justify-center gap-2 text-sm"
+       >
            <LogOut size={18} />
            Log Out
        </button>

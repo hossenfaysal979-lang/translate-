@@ -3,11 +3,13 @@ import { Navigation } from './components/Navigation';
 import { HomePage } from './pages/HomePage';
 import { ConversationPage } from './pages/ConversationPage';
 import { ProfilePage } from './pages/ProfilePage';
+import { LoginPage } from './pages/LoginPage';
 import { AppRoute, UserProfile, HistoryItem, CallContext } from './types';
 import { INITIAL_POINTS } from './constants';
 import { TranslationCard } from './components/TranslationCard';
 
 const App: React.FC = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentRoute, setCurrentRoute] = useState<AppRoute>(AppRoute.HOME);
   const [callContext, setCallContext] = useState<CallContext>('face-to-face');
   const [user, setUser] = useState<UserProfile>({
@@ -29,6 +31,16 @@ const App: React.FC = () => {
       }
     }
   }, []);
+
+  const handleLogin = () => {
+    // Mock login logic
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setCurrentRoute(AppRoute.HOME);
+  };
 
   const updateUserPoints = (newPoints: number) => {
     setUser({ ...user, points: newPoints });
@@ -63,7 +75,7 @@ const App: React.FC = () => {
           />
         );
       case AppRoute.PROFILE:
-        return <ProfilePage user={user} />;
+        return <ProfilePage user={user} onLogout={handleLogout} />;
       case AppRoute.HISTORY:
         return (
             <div className="p-6 pb-24">
@@ -91,10 +103,12 @@ const App: React.FC = () => {
     }
   };
 
+  if (!isAuthenticated) {
+    return <LoginPage onLogin={handleLogin} />;
+  }
+
   return (
     <div className="min-h-screen bg-[#f8f9ff] max-w-md mx-auto relative shadow-2xl overflow-hidden">
-      {/* App Header - Only for history/profile if needed, but we removed it for Home for a cleaner look */}
-      
       {/* Main Content */}
       <main className="h-full overflow-y-auto no-scrollbar">
         {renderContent()}
