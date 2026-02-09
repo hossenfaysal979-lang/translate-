@@ -5,7 +5,8 @@ import {
   ChevronLeft, Sparkles, MessageCircle, Monitor, Globe, Power, 
   X, Palette, ShieldCheck, BrainCircuit, Activity,
   Maximize2, Languages, Settings2, ShieldAlert, Cpu,
-  Smartphone, Search, Layers, Zap as LucideZap, Timer, AlertCircle, Send
+  Smartphone, Search, Layers, Zap as LucideZap, Timer, AlertCircle, Send,
+  Youtube, Plus
 } from 'lucide-react';
 import { translateText } from '../services/geminiService';
 
@@ -39,18 +40,19 @@ export const UniversalTranslatePage: React.FC<UniversalTranslatePageProps> = ({ 
   const recognitionRef = useRef<any>(null);
 
   const apps = [
+    { name: 'YouTube', icon: Youtube, color: 'bg-[#FF0000]', desc: 'Streaming Captions' },
     { name: 'WhatsApp', icon: MessageCircle, color: 'bg-[#25D366]', desc: 'Direct Audio Hook' },
+    { name: 'Telegram', icon: Send, color: 'bg-[#229ED9]', desc: 'API Bridge' },
     { name: 'WeChat', icon: () => (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M7 10c0-3.314 2.686-6 6-6s6 2.686 6 6-2.686 6-6 6c-.53 0-1.034-.07-1.512-.198L8 18l.42-3.146C7.545 14.07 7 12.11 7 10z" />
         <path d="M3 13c0-2.209 1.791-4 4-4s4 1.791 4 4-1.791 4-4 4c-.354 0-.689-.046-1.008-.132L4 18l.28-2.097C3.526 15.253 3 14.193 3 13z" />
       </svg>
     ), color: 'bg-[#07C160]', desc: 'AI Vision Overlay' },
-    // Fix: Added Send to the lucide-react import list.
-    { name: 'Telegram', icon: Send, color: 'bg-[#229ED9]', desc: 'API Bridge' },
-    { name: 'IMO', icon: Globe, color: 'bg-[#00adef]', desc: 'Smart Inject' },
-    { name: 'Messenger', icon: MessageCircle, color: 'bg-[#0084FF]', desc: 'Meta Hook' },
     { name: 'Zoom', icon: Monitor, color: 'bg-[#2D8CFF]', desc: 'Meeting Sync' },
+    { name: 'Messenger', icon: MessageCircle, color: 'bg-[#0084FF]', desc: 'Meta Hook' },
+    { name: 'IMO', icon: Globe, color: 'bg-[#00adef]', desc: 'Smart Inject' },
+    { name: 'Other Apps', icon: Plus, color: 'bg-slate-700', desc: 'Universal Hook' },
   ];
 
   const filteredApps = apps.filter(app => app.name.toLowerCase().includes(searchQuery.toLowerCase()));
