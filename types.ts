@@ -7,10 +7,11 @@ export enum AppRoute {
   CALL_MODE = 'CALL_MODE',
   VIDEO_FILE_TRANSLATE = 'VIDEO_FILE_TRANSLATE',
   STREAM_VIDEO = 'STREAM_VIDEO',
-  UNIVERSAL_TRANSLATE = 'UNIVERSAL_TRANSLATE'
+  UNIVERSAL_TRANSLATE = 'UNIVERSAL_TRANSLATE',
+  SCREEN_TRANSLATE = 'SCREEN_TRANSLATE'
 }
 
-export type CallContext = 'face-to-face' | 'phone' | 'whatsapp' | 'conference' | 'video' | 'video_file' | 'universal' | 'internet';
+export type CallContext = 'face-to-face' | 'phone' | 'whatsapp' | 'conference' | 'video' | 'video_file' | 'universal' | 'internet' | 'screen';
 
 export enum Language {
   ENGLISH = 'English',

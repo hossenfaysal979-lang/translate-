@@ -2,7 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { Language, TranslationMode, HistoryItem, UserProfile, CallContext, AppRoute } from '../types';
 import { translateText } from '../services/geminiService';
-import { ArrowRightLeft, Mic, Camera, Loader2, Sparkles, ChevronRight, Globe, Zap, Copy, Check, Volume2 } from 'lucide-react';
+import { ArrowRightLeft, Mic, Camera, Loader2, Sparkles, ChevronRight, Globe, Zap, Copy, Check, Volume2, MonitorSmartphone } from 'lucide-react';
 import { COMMUNICATION_TOOLS, MODE_PRICING, SUPPORTED_LANGUAGES } from '../constants';
 
 interface HomePageProps {
@@ -109,8 +109,9 @@ export const HomePage: React.FC<HomePageProps> = ({ user, updateUserPoints, addT
         
         <div className="flex justify-between items-center mt-6 pt-6 border-t border-slate-50">
           <div className="flex gap-4">
-            <button className="w-14 h-14 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center hover:bg-indigo-50 hover:text-indigo-600 transition-all border border-transparent hover:border-indigo-100"><Mic size={24} /></button>
-            <button onClick={() => fileInputRef.current?.click()} className="w-14 h-14 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center hover:bg-indigo-50 hover:text-indigo-600 transition-all border border-transparent hover:border-indigo-100"><Camera size={24} /></button>
+            <button className="w-14 h-14 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center hover:bg-indigo-50 hover:text-indigo-600 transition-all border border-transparent hover:border-indigo-100 shadow-sm"><Mic size={24} /></button>
+            <button onClick={() => { setCallContext('screen'); navigate(AppRoute.SCREEN_TRANSLATE); }} className="w-14 h-14 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center hover:bg-indigo-50 hover:text-indigo-600 transition-all border border-transparent hover:border-indigo-100 shadow-sm"><Camera size={24} /></button>
+            <button onClick={() => { setCallContext('screen'); navigate(AppRoute.SCREEN_TRANSLATE); }} className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center hover:bg-emerald-100 transition-all border border-emerald-100 shadow-sm animate-pulse"><MonitorSmartphone size={24} /></button>
             <input type="file" ref={fileInputRef} className="hidden" accept="image/*" />
           </div>
           
@@ -164,6 +165,7 @@ export const HomePage: React.FC<HomePageProps> = ({ user, updateUserPoints, addT
               onClick={() => {
                 if (tool.context === 'video_file') navigate(AppRoute.VIDEO_FILE_TRANSLATE);
                 else if (tool.context === 'universal') navigate(AppRoute.UNIVERSAL_TRANSLATE);
+                else if (tool.context === 'screen') navigate(AppRoute.SCREEN_TRANSLATE);
                 else if (tool.context === 'streaming_video') navigate(AppRoute.STREAM_VIDEO);
                 else { setCallContext(tool.context as CallContext); navigate(AppRoute.CALL_MODE); }
               }}
@@ -175,10 +177,15 @@ export const HomePage: React.FC<HomePageProps> = ({ user, updateUserPoints, addT
               <h4 className="font-black text-slate-900 text-base tracking-tight leading-tight">{tool.label}</h4>
               <p className="text-[10px] text-slate-400 mt-2 font-bold tracking-widest uppercase leading-tight opacity-70">{tool.desc}</p>
               
-              {tool.hasTrial && (
+              {tool.hasTrial ? (
                 <div className="mt-4 inline-flex items-center gap-2 px-2.5 py-1 bg-indigo-600 rounded-xl">
                   <Globe size={10} className="text-white" />
-                  <span className="text-[9px] font-black uppercase text-white tracking-tighter italic">12 Min Trial</span>
+                  <span className="text-[9px] font-black uppercase text-white tracking-tighter italic">Trial Active</span>
+                </div>
+              ) : (
+                <div className="mt-4 inline-flex items-center gap-2 px-2.5 py-1 bg-emerald-600 rounded-xl">
+                  <Sparkles size={10} className="text-white" fill="currentColor" />
+                  <span className="text-[9px] font-black uppercase text-white tracking-tighter italic">Unlimited Free</span>
                 </div>
               )}
 

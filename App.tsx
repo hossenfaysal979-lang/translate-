@@ -8,6 +8,7 @@ import { LoginPage } from './pages/LoginPage';
 import { VideoFileTranslatorPage } from './pages/VideoFileTranslatorPage';
 import { StreamingVideoPage } from './pages/StreamingVideoPage';
 import { UniversalTranslatePage } from './pages/UniversalTranslatePage';
+import { ScreenTranslatePage } from './pages/ScreenTranslatePage';
 import { AppRoute, UserProfile, HistoryItem, CallContext } from './types';
 import { INITIAL_POINTS } from './constants';
 import { TranslationCard } from './components/TranslationCard';
@@ -98,6 +99,14 @@ const App: React.FC = () => {
             navigate={setCurrentRoute}
           />
         );
+      case AppRoute.SCREEN_TRANSLATE:
+        return (
+          <ScreenTranslatePage 
+            user={user}
+            navigate={setCurrentRoute}
+            addToHistory={addToHistory}
+          />
+        );
       case AppRoute.PROFILE:
         return <ProfilePage user={user} onLogout={handleLogout} />;
       case AppRoute.HISTORY:
@@ -135,7 +144,8 @@ const App: React.FC = () => {
     AppRoute.VIDEO_FILE_TRANSLATE, 
     AppRoute.STREAM_VIDEO,
     AppRoute.UNIVERSAL_TRANSLATE,
-    AppRoute.CALL_MODE
+    AppRoute.CALL_MODE,
+    AppRoute.SCREEN_TRANSLATE
   ].includes(currentRoute);
 
   return (

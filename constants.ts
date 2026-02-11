@@ -1,6 +1,6 @@
 
 import { Language, TranslationMode } from './types';
-import { PlayCircle, Video, Sparkles, Cpu } from 'lucide-react';
+import { PlayCircle, Video, Sparkles, Cpu, Scan, Layers, MonitorSmartphone } from 'lucide-react';
 
 export const SUPPORTED_LANGUAGES = Object.values(Language);
 
@@ -24,6 +24,30 @@ export const COMMUNICATION_TOOLS = [
     desc: 'Universal AI Overlay',
     hasTrial: true,
     trialLimit: 720
+  },
+  {
+    id: 'on_screen_translate',
+    label: 'On-Screen Engine',
+    icon: Layers,
+    color: 'bg-emerald-600',
+    bgLight: 'bg-emerald-50',
+    text: 'text-emerald-600',
+    context: 'screen',
+    desc: 'Unlimited Text Inject',
+    hasTrial: false,
+    trialLimit: 0
+  },
+  {
+    id: 'magic_screen',
+    label: 'Magic Screen Hook',
+    icon: MonitorSmartphone,
+    color: 'bg-amber-600',
+    bgLight: 'bg-amber-50',
+    text: 'text-amber-600',
+    context: 'screen',
+    desc: 'Pixel Logic Translate',
+    hasTrial: false,
+    trialLimit: 0
   },
   {
     id: 'video_call',
